@@ -6,7 +6,7 @@
 - [Quit the Vim](#quit-the-vim)
 - [What is Vim?](#what-is-vim)
   * [History of Vim](#history-of-vim)
-  * [Vim Forks and Neovim](#vim-forks-and-neovim)<<
+  * [Vim Forks and Neovim](#vim-forks-and-neovim)
 - [Creating a file](#creating-a-file)
 - [Vim modes](#vim-modes)
 - [General](#general)
