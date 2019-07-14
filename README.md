@@ -6,7 +6,7 @@
 - [Quit the Vim](#quit-the-vim)
 - [What is Vim?](#what-is-vim)
   * [History of Vim](#history-of-vim)
-  * [Vim Forks and Neovim](#vim-forks-and-neovim)
+  * [Vim Forks and Neovim](#vim-forks-and-neovim)<<
 - [Creating a file](#creating-a-file)
 - [Vim modes](#vim-modes)
 - [General](#general)
@@ -89,7 +89,7 @@ $ vim directory/filename
 Vim provides different modes to users for focus on content.
 
 * normal mode: vim starts with this mode. esc is used for enter this mode. `:h Normal-mod`
-* insert mode: used for add text to editor. [insert komutları](insert-moda-geçme)nın biriyle bu moda geçilir.  `:h Insert-mod`
+* insert mode: used for add text to editor, can be entered by one of [insert commandı](#entering-insert-mode) :h Insert-mod`
 * visual mode: used for select an area on text. Character-wise selection can be made by v, line-wise selection can be made by V, and block-wise with C-v
 * command mode: From the normal mode, can be entered by : and used for enter command. Example: `:h ctrl-r <enter>`
 
@@ -482,7 +482,7 @@ To check whether your mapping conflict other mappings:
 
 Sometimes mappings conflict other mappings, so that defining your mappings as no-recursive is a good practice.
 
-The example below demosrates such a case, the _o_ goes one line below and enter insert mode. The expected 4 lines 
+The example below demostrates such a case, the _o_ goes one line below and enter insert mode. The expected 4 lines 
 below and enter insert mode behaviour, end up with endless loop. The _o_ will call _4o_ and it will call another _4o_ etc.
 
 ```
