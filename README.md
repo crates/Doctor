@@ -88,8 +88,9 @@ $ vim directory/filename
 
 Vim provides different modes to users for focus on content.
 
-* normal mode: vim starts with this mode. esc is used for enter this mode. `:h Normal-mode`
-* insert mode: used for add text to editor, can be entered by one of [insert commandı](#entering-insert-mode) :h Insert-mod`
+* normal mode: vim starts with this mode. Esc is used for enter this mode. `:h Normal-mode`
+* insert mode: used for add text to editor, can be entered by one of [insert commands](#entering-insert-mode) :h Insert-mod`
+* replace mode: used for replace existing text by directly typing over it. `:h  Replace-mode`
 * visual mode: used for select an area on text. Character-wise selection can be made by v, line-wise selection can be made by V, and block-wise with C-v
 * command mode: From the normal mode, can be entered by : and used for enter command. Example: `:h ctrl-r <enter>`
 
@@ -227,35 +228,36 @@ In more general<sup>2<sup>:
 ### Entering insert mode ##
 
 ```
-/~~~~~~~~~~~\
-|command mod|
-\~~~~~~~~~~~/
-|          |
-^ :/       v Esc Esc
-|          |
-/~~~~~~~~~~\<---Esc------/~~~~~~~~~~\
-|normal mod|             |insert mod|
-\~~~~~~~~~~/--aAiIoOsS-->\~~~~~~~~~~/
- |        | 
- v vV     ^ Esc
- |        | 
-/~~~~~~~~~~\
-|visual mod|
-\~~~~~~~~~~/
+                           /~~~~~~~~~~~~\
+                           |command mode|
+                           \~~~~~~~~~~~~/
+                           |           |
+                           ^ :/        v Esc Esc
+                           |           |
+ /~~~~~~~~~~~~\----Esc---->/~~~~~~~~~~~\<---Esc------/~~~~~~~~~~~\
+ |replace mode|            |normal mode|             |insert mode|
+ \~~~~~~~~~~~~/<----R------\~~~~~~~~~~~/--aAiIoOsS-->\~~~~~~~~~~~/
+                           |           |
+                           v vV        ^ Esc
+                           |           |
+                           /~~~~~~~~~~~\
+                           |visual mode|
+                           \~~~~~~~~~~~/
 
 ```
 ``` 
-i        add text before cursor
-I        add text after cursor
-a        add after cursor
-A        add text to end of line
+i        insert text before cursor
+I        insert text to start of the line
+a        append after cursor
+A        append text to end of line
 o        make newline below to current line and add text
 O        make newline above to current line and add text
 s        delete character under cursor and enter insert mode
 S        delete all line and enter insert mode
 cc       same as above
-cw       change word
-shift-r  Change word in-place (like insert in Windows)
+cw       change from cursor position to start of the next word
+
+S-r      enters [replace mode](#replace-mode), change text in place 
 ```
 
 ### Working more than one file
@@ -353,10 +355,11 @@ q[a-z]   start recording
 ### Editing
 
 ```
+x        delete the character under the cursor
 X        delete the character before the cursor
-dw       delete word under cursor
-dW       delete Word
-d^       delete till beginning of the line
+dw       delete word from cursor position to start of the next word(punctuation considered as a word)
+dW       delete Word from cursor position to start of the next word 
+d^       delete from first non-whitespace character to end of line (inclusively)
 d$       delete till end of the line
 D        same as above
 dd       delete all line
@@ -364,12 +367,12 @@ dib      delete content inside the paranthesis
 ```
 
 ```
-r<c>     change the character <c> 
+r<c>     change the character under the cursor to <c> 
 ```
 
 ```
 *        find next word under cursor
-f<c>     find character <c> from current cursor position
+f<c>     find character <c> from current cursor position inside the line
 '.       jump to last edited line
 g;       jump back to last editted position
 ```
@@ -415,7 +418,7 @@ dgg     delete from current line to beginning of the file
 
 On Unix-like operating systems, most of system tools are C programs and some of these programs take arguments written in a file. Dotfiles, files with starts with ., gives these paramaters and 
 define program behaviour on runtime. You can read interesting story of born this trend from [here](https://plus.google.com/101960720994009339267/posts/R58WgWwN9jp).
-Dotfiles are specially useful when from current machine to another, it make you avoid to configure from beginning. Keeping dotfiles in a version control system is a good practice, most of users share their 
+Dotfiles are specially useful when you set up a new machine, it make you avoid to configure all the things from beginning. Keeping dotfiles in a version control system is a good practice, most of users share their 
 dotfiles in public repos.
 
  `.bashrc`, `.profile`, `.vimrc` are examples of dotfiles.
@@ -440,7 +443,7 @@ we need to add mappings to .vimrc make them permanent.
 
 - to work in normal mode **nmap**
 - to work in insert mode **imap**
-- to work in visual mode **vmap**
+- to work in visual mode **xmap**
 
 
 ```
@@ -521,7 +524,7 @@ To see all the mappings:
 
 #### Adding plugin
 
-The easiest way to adding plugin to Vim is make use of a plugin manager. There are more than one plugin managers:
+The easiest way to adding plugin to Vim is make use of a plugin manager. There are several of them:
 
 - [Pathogen](https://github.com/tpope/vim-pathogen)
 - [Vim8 packages](http://vimhelp.appspot.com/repeat.txt.html#packages)
@@ -534,7 +537,7 @@ The easiest way to adding plugin to Vim is make use of a plugin manager. There a
 
 ##### adding plugin with vim-plug
 
-vim-plug is a plugin manager for Vim. It allows you to add, update, remove plugins.
+vim-plug is a plugin manager for Vim which allows you to add, update, remove plugins.
 
 run the follong command:
 ```bash
@@ -548,7 +551,7 @@ call plug#begin()
 " plugins
 call plug#end()
 ```
-Add the plugin you want to install between`call plug#begin()` and `call plug#end()` commands. Most of vim plugins
+Add the plugin you want to install between `call plug#begin()` and `call plug#end()` commands. Most of vim plugins
 host and maintain on Github.
 
 For example, to add plugin on the link https://github.com/tpope/vim-sensible you should put:
