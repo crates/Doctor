@@ -789,20 +789,20 @@ with GNU make build tool:
 ```
 $ sudo make -j 8
 ```
-The '-j' parameter says how much core we dedicate to build process, generally the more core passed, the faster build, therefore less build time will take.
-End of this process the executables will be created. To make them available by root we need to copy them to appropriate directories:
+The '-j' parameter says how many cores we dedicate to the build process. Generally the more cores used, the faster the build process, therefore the less time the build will take.
+At the end of this process, an executables will be created. To make them available as system command we need to copy them to appropriate directories (you need superuser permissions):
 
 ```
 $ sudo make install
 ```
 
-Don't delete the repo, therefore you can experiment latest features or apply patches, after `git pull` it. The build will take much less because *make* only compile changed files.
+Don't delete the repo yet, in order to apply patches or experiment with the latest features by `git pull`ing them. The subsequent build will be a lot faster, because *make* compiles only changed files.
 
 -----
 
 - Did you like this document, please leave it a star.
 - Do you want to add or edit something, is something important missing? Fork the repo and send a [pull request](https://help.github.com/en/articles/creating-a-pull-request)
-- Follow me on Twitter (before twitter mark me as a bot) [@adembubudak](https://twitter.com/adembudak_)
+- Follow me on Twitter (before twitter marks me as a bot) [@adembubudak](https://twitter.com/adembudak_)
 
 ### Licence 
 
