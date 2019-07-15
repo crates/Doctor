@@ -796,6 +796,8 @@ Don't delete the repo yet, in order to apply patches or experiment with the late
 - Do you want to add or edit something, is something important missing? Fork the repo and send a [pull request](https://help.github.com/en/articles/creating-a-pull-request)
 - Follow me on Twitter (before twitter marks me as a bot) [@adembubudak](https://twitter.com/adembudak_)
 
+[Top](README.md#top)
+
 ### Licence 
 
 <a href="http://www.wtfpl.net/"><img
