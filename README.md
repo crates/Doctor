@@ -1,6 +1,6 @@
 <p align="center"><img width="100" src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Vimlogo.svg" alt="Vim logo"></p>
 
- <p align="center"> An alternative learning resource for Vim </p>
+ <p align="center"> Yet another quick reference for Vim text editor </p>
 		 
 
 - [Quit the Vim](#quit-the-vim)
@@ -88,7 +88,7 @@ $ vim directory/filename
 
 Vim provides different modes to users for focus on content.
 
-* normal mode: vim starts with this mode. esc is used for enter this mode. `:h Normal-mod`
+* normal mode: vim starts with this mode. esc is used for enter this mode. `:h Normal-mode`
 * insert mode: used for add text to editor, can be entered by one of [insert commandı](#entering-insert-mode) :h Insert-mod`
 * visual mode: used for select an area on text. Character-wise selection can be made by v, line-wise selection can be made by V, and block-wise with C-v
 * command mode: From the normal mode, can be entered by : and used for enter command. Example: `:h ctrl-r <enter>`
@@ -103,9 +103,10 @@ $ vimtutor          Official tutorial of Vim
 :q                  quit
 :w                  write
 :saveas filename    save as
-:wa[!]              write all
+:wa                 write all the changes
+:wa[!]              force Vim write all the changes
 :wq                 write and quit
-:x                  ditto
+:x                  update and quit
 :wqa                write quit all
 :q!                 if file is changed and not supposed to saved, quit
 ```
@@ -124,16 +125,16 @@ y                yank, copy
 yy               yank all line
 p                paste to below of cursor
 P                Paste to above of the cursor
-c                cut, cut the selected area
+c                change, change the selected area
 "<reg>y          copy selected area to regıster (a-z den register) 
 "<reg>p          paste to register (a-z register) 
 .                repeat latest command
 ```
 
 ```
-:term    start a terminal session inside vim
-:!<cmd>  vim'den ayrılmadan shell'den <cmd> komutunu calistir Ex: `!g++ -wall -std=c++14 main.cpp`, `!ruby %`
-:!<cmd>  run a shell command inside vim, ex:`!g++ -wall -std=c++14 main.cpp`, `!ruby %`
+
+:term    start a terminal session inside vim, more at `:h terminal`
+:!<cmd>   execute <cmd> commands without leaving Vim Ex: `!g++ -wall -std=c++14 main.cpp`, `!ruby %`
 :sh      go to shell, return by `exit`
 C-z      send vim to background, return by fg
 ```
@@ -155,7 +156,7 @@ $        end of line
 ```
 
 ```
-w        jump to first character of next word (Notations are count on a word)
+w        jump to first character of next word
 e        jump to last character of the currect word
 b        jump to first character of the current word
 ```
@@ -167,34 +168,28 @@ L        jump to *lower* of the screen
 ```
 
 ```
-C-b      a full screen size up
-C-f      a full screen size down
-C-u      a half screen size up
-C-d      a half screen size down
+C-b      jump a full screen size up
+C-f      jump a full screen size down
+C-u      jump half screen size up
+C-d      jump half screen size down
 ```
 
 ```
-zt       move screen from cursor position to the top
-z<enter> ditto
-zb       move screen from cursor position to the bottom
-z-       ditto
-zz       make cursor position of the screen middle
-z.       ditto
-```
-```
-%        jump to matching paranthesis
-(        previous sentence
-)        next sentence
-{        previous paragraph
-}        next paragraph
-[{       jump beginning of the code block
-]}       jump end of the code block
-gd       go to declaration (of a variable in programming)
+`:h scroll-cursor`
+
+z<enter> redraw, cursor on the top of window, and put cursor at first non-blank in the line
+zt       like above but leave the cursor in the same column
+
+z-       redraw, cursor on the bottom of window, and put cursor at first non-blank in the line
+zb       like above but leave the cursor in the same column
+
+z.       redraw, cursor on the center of window, and put cursor at first non-blank in the line
+zz       like above but leave the cursor in the same column
 ```
 
 ```
-w        jump beginning of next word (punctuation considered words)
-e        jump end of the next word
+w        jump beginning of next word (punctuation considered as a word)
+e        jump end of the word
 ge       jump end of the previous word
 b        jump begining of the previous word
 ^        jump to first non space character on line
@@ -202,12 +197,11 @@ gg       top of the file
 G        bottom of the file
 +        begining of the next line
 -        beginning of the previous line
-.        repeat the last command
 ```
  
 ```                                                                                         v            v
-E        jump beginning of the next word (punctuation not considered words) Example:  e (abcd)    E (abcd)
-W        jump end of the next word (punctuation not considerd as words) 
+W        jump beginning of the next word (punctuation not considered words) Example:  e (abcd)    E (abcd)
+E        jump end of the next word (punctuation not considerd as words) 
 B        jump begining of the previous word
 #G       go to line number #  Ex: 38G
 #gg      same as #G
@@ -257,10 +251,10 @@ a        add after cursor
 A        add text to end of line
 o        make newline below to current line and add text
 O        make newline above to current line and add text
-s        delete character on current character
-S        delete all line
-cc       ditto
-cw       delete the word and enter insert mode (change word)
+s        delete character under cursor and enter insert mode
+S        delete all line and enter insert mode
+cc       same as above
+cw       change word
 shift-r  Change word in-place (like insert in Windows)
 ```
 
@@ -271,23 +265,21 @@ shift-r  Change word in-place (like insert in Windows)
 
 ```
 C-ws       split current window horizontally (alternative :split)
-C-ws a.txt create a a.txt file and start editing
- 
 C-wv       split current window vertically (alternative :vsplit)
 C-ww       jump to next window
 ```
 
 ```
-C-w h      jump left from current window
-C-w j      jump below from current window
-C-w k      jump above from current window
-C-w l      jump left from current window
-C-w t      jump to window on the top
-C-w b      jump to window on the bottom
+C-w h      jump from current window to window on the left
+C-w j      jump from current window to window on below
+C-w k      jump from current window to window on above
+C-w l      jump from current window to window on left
+C-w t      jump to top most left window
+C-w b      jump to bottom most right window
 ```
 ```
 C-wq       close current window
-:close     ditto
+:close     same as above
 :only      close windows other than current
 ```
 ```
@@ -296,26 +288,26 @@ C-w#>      resize current window to the right # of times (default 1)
 :res #     resize horizontally splitted window # of times
 ```
 ```
-C-wH       move current window to the left
-C-wJ       move current window to the below
-C-wK       move current window to the above
-C-wL       move current window to the left
+:h window-moving
+C-wH       move current window to the far left
+C-wJ       move current window to the very bottom
+C-wK       move current window to the very top
+C-wL       move current window to the far right
 ```
 
 ```
-$ vim -o3 f1.txt f2.txt f3.txt      open the files horizontally splitted
-$ vim -O3 f1.txt f2.txt f3.txt      open the files vertically splitted
+$ vim -O2 f1.txt f2.txt   open Vim with `-O[N]` paramater, (N=2 here), vertically splitted f1.txt and f.txt  (more parameters `vim --help`)
+$ vim -o2 f1.txt f2.txt   like above but horizontally splitted
+$ vim -P2 f1.txt f2.txt   like above but on tab pages
 
 $ vim f1.txt f2.txt f3.txt          open the files at one but show only one at a time (:next to next file and  :prev)
 
 ```
-#### using tabs
+#### using tab pages
 
 ```
-$ vim -p f1.txt f2.txt              open f1.txt and f2.txt files with tab
-
 :tabedit filename   edit specified file in a new tab
-:tabfind filename   open the file in a new tab and start edit
+:tabfind filename   open a new tab with filename given, searching the 'path' to find it
 ```
 ```
 :tabn       next tab
@@ -340,7 +332,7 @@ $ vim -p f1.txt f2.txt              open f1.txt and f2.txt files with tab
 **operator [number] move** or **[number] operator move**
 
 ```
-c3w      or 3cw, change 3 words (cw cw cw)
+c3w      or 3cw, cw cw cw
 4j       jjjj 
 2w       w w,  go to the begining of 2 next words
 2dd      delete 2 lines
@@ -362,11 +354,11 @@ q[a-z]   start recording
 
 ```
 X        delete the character before the cursor
-dw       delete the next word
-dW       delete the next word including while space 
+dw       delete word under cursor
+dW       delete Word
 d^       delete till beginning of the line
 d$       delete till end of the line
-D        ditto
+D        same as above
 dd       delete all line
 dib      delete content inside the paranthesis
 ```
@@ -382,7 +374,7 @@ f<c>     find character <c> from current cursor position
 g;       jump back to last editted position
 ```
 ```
-:ab slm selam         in insert mode, when written 'slm'<space> change it with 'selam' 
+:ab sth something         in insert mode, when written 'sth'<space> change it with 'something' 
 ```
 
 ```
